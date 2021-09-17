@@ -1,5 +1,5 @@
 import { Memoize } from 'typescript-memoize';
-import { IEdgeType } from 'src/server/graphql/pagination';
+import { IEdgeType } from '../graphql/pagination';
 import {
   Brackets,
   ObjectType,
@@ -83,6 +83,14 @@ export default class Paginator<Entity> {
   public async getNextBeforeCursor(): Promise<string | null> {
     await this.paginate();
     return this.nextBeforeCursor;
+  }
+
+  public async hasNextPage(): Promise<boolean> {
+    return (await this.getNextAfterCursor()) != null;
+  }
+
+  public async hasPrevPage(): Promise<boolean> {
+    return (await this.getNextBeforeCursor()) != null;
   }
 
   @Memoize()

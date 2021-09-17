@@ -16,7 +16,14 @@ input PageArgs {
   afterCursor: String
   beforeCursor: String
   limit: Float = 3
-  order: String = "ASC"
+  order: String = "DESC"
+}
+
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
 }
 
 type PaginatedPost {
@@ -24,6 +31,7 @@ type PaginatedPost {
   nextAfterCursor: String
   nextBeforeCursor: String
   nodes: [Post!]
+  pageInfo: PageInfo!
   totalCount: Int!
 }
 

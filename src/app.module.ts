@@ -20,7 +20,7 @@ import { AppController } from './app.controller';
     RenderModule.forRootAsync(
       Next({
         dev: process.env.NODE_ENV !== 'production',
-        dir: './src',
+        // dir: './src/ui',
       }),
     ),
   ],

@@ -13,6 +13,8 @@ import {
 } from 'react-relay';
 import UserProfile from './UserProfile';
 import PostContainer from './PostContainer';
+import logo from './logo.svg';
+import Image from 'next/image';
 
 export type AppQueryLoader = (
   variables: AppContainerQueryVariables,
@@ -40,6 +42,7 @@ interface AppProps {
 
 const AppWrapper = (props: AppProps) => (
   <>
+    <Image src="/logo.svg" alt="me" width="64" height="64" />
     <UserProfile {...props} />
     <PostContainer userRef={props?.userRef ?? null} />
   </>

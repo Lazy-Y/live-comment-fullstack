@@ -56,28 +56,28 @@ const PostList = ({ userRef }: Props) => {
     queryRef,
   );
 
-  //   const config = useMemo(
-  //     () => ({
-  //       subscription: graphql`
-  //         subscription PostListSubscription($connections: [ID!]!) {
-  //           postAdded {
-  //             edge @prependEdge(connections: $connections) {
-  //               node {
-  //                 ...PostItem__Post
-  //               }
-  //               cursor
-  //             }
-  //           }
-  //         }
-  //       `,
-  //       variables: {
-  //         connections: [data.queryPosts.__id],
-  //       },
-  //     }),
-  //     [data.queryPosts.__id],
-  //   );
+  const config = useMemo(
+    () => ({
+      subscription: graphql`
+        subscription PostListSubscription($connections: [ID!]!) {
+          postAdded {
+            edge @prependEdge(connections: $connections) {
+              node {
+                ...PostItem__Post
+              }
+              cursor
+            }
+          }
+        }
+      `,
+      variables: {
+        connections: [data.queryPosts.__id],
+      },
+    }),
+    [data.queryPosts.__id],
+  );
 
-  //   useSubscription(config);
+  useSubscription(config);
 
   if (data == null) {
     return <div>Loading...</div>;

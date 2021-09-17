@@ -16,9 +16,9 @@ import { UsersService } from '../users/users.service';
 import { Post } from './post.model';
 import { PaginatedPost, PostEdge } from './post.pagination.model';
 import { PostsService } from './posts.service';
-// import { PubSub } from 'graphql-subscriptions';
+import { PubSub } from 'graphql-subscriptions';
 
-// const pubSub = new PubSub();
+const pubSub = new PubSub();
 
 @ObjectType()
 class CreatePostResponse {
@@ -70,14 +70,14 @@ export class PostsResolver {
         cursor,
       },
     };
-    // pubSub.publish('postAdded', { postAdded: response });
+    pubSub.publish('postAdded', { postAdded: response });
     return response;
   }
 
-  // @Subscription(() => CreatePostResponse)
-  // postAdded() {
-  //   return pubSub.asyncIterator('postAdded');
-  // }
+  @Subscription(() => CreatePostResponse)
+  postAdded() {
+    return pubSub.asyncIterator('postAdded');
+  }
 
   @ResolveField()
   public async user(@Parent() post: Post): Promise<User> {

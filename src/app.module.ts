@@ -15,6 +15,10 @@ import { AppController } from './app.controller';
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
+      installSubscriptionHandlers: true,
+      // subscriptions: {
+      //   'graphql-ws': true,
+      // },
     }),
     TypeOrmModule.forRoot(),
     RenderModule.forRootAsync(

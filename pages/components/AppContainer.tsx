@@ -23,7 +23,7 @@ const query = graphql`
   query AppContainerQuery($id: ID!) {
     user(id: $id) {
       ...UserProfile__User
-      # ...PostComposer__User
+      ...PostComposer__User
     }
   }
 `;
@@ -41,12 +41,7 @@ interface AppProps {
 const AppWrapper = (props: AppProps) => (
   <>
     <UserProfile {...props} />
-    <PostContainer
-      userRef={
-        // props?.userRef ??
-        null
-      }
-    />
+    <PostContainer userRef={props?.userRef ?? null} />
   </>
 );
 

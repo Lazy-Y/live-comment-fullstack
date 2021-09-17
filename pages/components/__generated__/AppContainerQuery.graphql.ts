@@ -9,7 +9,7 @@ export type AppContainerQueryVariables = {
 };
 export type AppContainerQueryResponse = {
     readonly user: {
-        readonly " $fragmentRefs": FragmentRefs<"UserProfile__User">;
+        readonly " $fragmentRefs": FragmentRefs<"UserProfile__User" | "PostComposer__User">;
     };
 };
 export type AppContainerQuery = {
@@ -25,7 +25,12 @@ query AppContainerQuery(
 ) {
   user(id: $id) {
     ...UserProfile__User
+    ...PostComposer__User
   }
+}
+
+fragment PostComposer__User on User {
+  id
 }
 
 fragment UserProfile__User on User {
@@ -68,6 +73,11 @@ return {
             "args": null,
             "kind": "FragmentSpread",
             "name": "UserProfile__User"
+          },
+          {
+            "args": null,
+            "kind": "FragmentSpread",
+            "name": "PostComposer__User"
           }
         ],
         "storageKey": null
@@ -110,14 +120,14 @@ return {
     ]
   },
   "params": {
-    "cacheID": "f84d75f98f59eb0230ef2cd3ee90218d",
+    "cacheID": "96ec1a48b675c37913c68c97585c57f4",
     "id": null,
     "metadata": {},
     "name": "AppContainerQuery",
     "operationKind": "query",
-    "text": "query AppContainerQuery(\n  $id: ID!\n) {\n  user(id: $id) {\n    ...UserProfile__User\n  }\n}\n\nfragment UserProfile__User on User {\n  id\n  userName\n}\n"
+    "text": "query AppContainerQuery(\n  $id: ID!\n) {\n  user(id: $id) {\n    ...UserProfile__User\n    ...PostComposer__User\n  }\n}\n\nfragment PostComposer__User on User {\n  id\n}\n\nfragment UserProfile__User on User {\n  id\n  userName\n}\n"
   }
 };
 })();
-(node as any).hash = '80fac6c70edf0c0ed7ca0716c13ee0d9';
+(node as any).hash = '10a63ece3311025912150ab430b2901b';
 export default node;

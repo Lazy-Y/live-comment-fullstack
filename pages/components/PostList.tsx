@@ -6,9 +6,9 @@ import {
   usePaginationFragment,
   useSubscription,
 } from 'react-relay';
-// import PostComposer from './PostComposer';
+import PostComposer from './PostComposer';
 import PostItem from './PostItem';
-// import { PostComposer__User$key } from './__generated__/PostComposer__User.graphql';
+import { PostComposer__User$key } from './__generated__/PostComposer__User.graphql';
 import { PostListPaginationQuery } from './__generated__/PostListPaginationQuery.graphql';
 import { PostListQuery } from './__generated__/PostListQuery.graphql';
 import { PostList_Query$key } from './__generated__/PostList_Query.graphql';
@@ -16,8 +16,7 @@ import { PostList_Query$key } from './__generated__/PostList_Query.graphql';
 const PAGE_COUNT = 3;
 
 interface Props {
-  userRef: // PostComposer__User$key |
-  null;
+  userRef: PostComposer__User$key | null;
 }
 
 const PostList = ({ userRef }: Props) => {
@@ -86,7 +85,9 @@ const PostList = ({ userRef }: Props) => {
 
   return (
     <>
-      {/* {userRef && <PostComposer userRef={userRef} connectionID={data.queryPosts.__id} />} */}
+      {userRef && (
+        <PostComposer userRef={userRef} connectionID={data.queryPosts.__id} />
+      )}
       <br />
       <h2>All Posts</h2>
       <>

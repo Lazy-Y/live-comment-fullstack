@@ -1,7 +1,38 @@
+import { NextPage, NextPageContext } from 'next';
 import React from 'react';
+import dynamic from 'next/dynamic';
+import { graphql } from 'react-relay';
+const DynamicApp = dynamic(() => import('./App'), {
+  ssr: false,
+});
 
-const Index = () => {
-  return <div>Index Page</div>;
+// The component's props type
+type PageProps = {
+  title: string;
 };
 
-export default Index;
+// extending the default next context type
+type PageContext = NextPageContext & {
+  query: PageProps;
+};
+
+// react component
+const Page: NextPage<PageProps> = ({ title }) => {
+  console.log('show pages');
+
+  return (
+    <div>
+      <h1>{title}</h1>
+      <DynamicApp />
+    </div>
+  );
+};
+
+// assigning the initial props to the component's props
+Page.getInitialProps = (ctx: PageContext) => {
+  return {
+    title: ctx.query.title,
+  };
+};
+
+export default Page;

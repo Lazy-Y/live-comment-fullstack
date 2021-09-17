@@ -1,7 +1,7 @@
 import { NextPage, NextPageContext } from 'next';
 import React from 'react';
 import dynamic from 'next/dynamic';
-const DynamicApp = dynamic(() => import('./App'), {
+const DynamicApp = dynamic(() => import('ui/components/App'), {
   ssr: false,
 });
 

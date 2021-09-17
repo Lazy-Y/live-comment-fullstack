@@ -1,4 +1,3 @@
-import React from 'react';
 import { graphql, useFragment } from 'react-relay';
 import { PostItem__Post$key } from './__generated__/PostItem__Post.graphql';
 

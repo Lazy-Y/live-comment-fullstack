@@ -1,4 +1,3 @@
-import React from 'react';
 import { ChangeEvent, useState } from 'react';
 import { useFragment, graphql } from 'react-relay';
 import { UserProfile__User$key } from './__generated__/UserProfile__User.graphql';

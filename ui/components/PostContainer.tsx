@@ -1,4 +1,3 @@
-import React from 'react';
 import PostList from './PostList';
 import { PostComposer__User$key } from './__generated__/PostComposer__User.graphql';
 

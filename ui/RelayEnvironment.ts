@@ -11,6 +11,7 @@ import {
 } from 'relay-runtime';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 import fetchGraphQL from './fetchGraphQL';
+import ws from 'ws';
 
 // Relay passes a "params" object with the query name and text. So we define a helper function
 // to call our fetchGraphQL utility with params.text.
@@ -23,6 +24,7 @@ const subscriptionClient = new SubscriptionClient(
   {
     reconnect: true,
   },
+  ws,
 );
 
 const subscribe: SubscribeFunction = (

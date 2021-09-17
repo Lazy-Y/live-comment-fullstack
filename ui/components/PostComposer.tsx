@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { graphql, useFragment, useMutation } from 'react-relay';
 import { PostComposer__User$key } from './__generated__/PostComposer__User.graphql';
 

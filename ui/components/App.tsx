@@ -1,8 +1,7 @@
-import React from 'react';
 import { Suspense } from 'react';
-import AppContainer from '../components/AppContainer';
+import AppContainer from 'ui/components/AppContainer';
 import { RelayEnvironmentProvider } from 'react-relay/hooks';
-import RelayEnvironment from '../RelayEnvironment';
+import RelayEnvironment from 'ui/RelayEnvironment';
 const App = () => {
   return (
     <>

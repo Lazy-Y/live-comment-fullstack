@@ -1,7 +1,6 @@
 import { NextPage, NextPageContext } from 'next';
 import React from 'react';
 import dynamic from 'next/dynamic';
-import { graphql } from 'react-relay';
 const DynamicApp = dynamic(() => import('./App'), {
   ssr: false,
 });
@@ -18,8 +17,6 @@ type PageContext = NextPageContext & {
 
 // react component
 const Page: NextPage<PageProps> = ({ title }) => {
-  console.log('show pages');
-
   return (
     <div>
       <h1>{title}</h1>

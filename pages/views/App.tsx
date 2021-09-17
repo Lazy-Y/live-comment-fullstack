@@ -1,6 +1,6 @@
 import React from 'react';
 import { Suspense } from 'react';
-import PostList from './PostList';
+import AppContainer from '../components/AppContainer';
 import { RelayEnvironmentProvider } from 'react-relay/hooks';
 import RelayEnvironment from '../RelayEnvironment';
 const App = () => {
@@ -8,7 +8,7 @@ const App = () => {
     <>
       <RelayEnvironmentProvider environment={RelayEnvironment}>
         <Suspense fallback={'loading...'}>
-          <PostList />
+          <AppContainer />
         </Suspense>
       </RelayEnvironmentProvider>
     </>

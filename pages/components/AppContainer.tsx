@@ -12,7 +12,7 @@ import {
   UseQueryLoaderLoadQueryOptions,
 } from 'react-relay';
 import UserProfile from './UserProfile';
-// import PostContainer from './PostContainer';
+import PostContainer from './PostContainer';
 
 export type AppQueryLoader = (
   variables: AppContainerQueryVariables,
@@ -41,7 +41,12 @@ interface AppProps {
 const AppWrapper = (props: AppProps) => (
   <>
     <UserProfile {...props} />
-    {/* <PostContainer userRef={props?.userRef ?? null} /> */}
+    <PostContainer
+      userRef={
+        // props?.userRef ??
+        null
+      }
+    />
   </>
 );
 

@@ -21,7 +21,10 @@ export class PageArgs implements PagingQuery {
   order: Order;
 }
 
-export type PaginationTypeTuple<T> = [Type<IPaginatedType<T>>, Type<IEdgeType<T>>];
+export type PaginationTypeTuple<T> = [
+  Type<IPaginatedType<T>>,
+  Type<IEdgeType<T>>,
+];
 
 export interface IEdgeType<T> {
   cursor: string;
@@ -53,8 +56,14 @@ function Paginated<T>(classRef: Type<T>): PaginationTypeTuple<T> {
   abstract class PaginatedType implements IPaginatedType<T> {
     public paginator: Paginator<T>;
 
-    constructor(public queryBuilder: SelectQueryBuilder<T>, public paginationOptions: PaginationOptions<T>) {
-      this.paginator = buildPaginator(this.queryBuilder, this.paginationOptions);
+    constructor(
+      public queryBuilder: SelectQueryBuilder<T>,
+      public paginationOptions: PaginationOptions<T>,
+    ) {
+      this.paginator = buildPaginator(
+        this.queryBuilder,
+        this.paginationOptions,
+      );
     }
 
     @Field(() => [classRef], { nullable: true })
@@ -83,7 +92,10 @@ function Paginated<T>(classRef: Type<T>): PaginationTypeTuple<T> {
     }
   }
 
-  return [PaginatedType as Type<IPaginatedType<T>>, EdgeType as Type<IEdgeType<T>>];
+  return [
+    PaginatedType as Type<IPaginatedType<T>>,
+    EdgeType as Type<IEdgeType<T>>,
+  ];
 }
 
 class Pagination {

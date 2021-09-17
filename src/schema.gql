@@ -2,21 +2,18 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type CreatePostResponse {
+  edge: PostEdge!
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
 
 type Mutation {
-  createPost(content: String!, userID: ID!): Post!
+  createPost(content: String!, userID: ID!): CreatePostResponse!
   createUser(userName: String!): User!
-}
-
-input PageArgs {
-  afterCursor: String
-  beforeCursor: String
-  limit: Float = 3
-  order: String = "DESC"
 }
 
 type PageInfo {
@@ -51,7 +48,7 @@ type PostEdge {
 type Query {
   allPosts: [Post!]!
   post(id: ID!): Post!
-  queryPosts(pageArg: PageArgs!): PaginatedPost!
+  queryPosts(after: String = null, first: Int = 3): PaginatedPost!
   user(id: ID!): User!
 }
 

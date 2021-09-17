@@ -1,8 +1,20 @@
 import { Memoize } from 'typescript-memoize';
 import { IEdgeType } from 'src/server/graphql/pagination';
-import { Brackets, ObjectType, OrderByCondition, SelectQueryBuilder, WhereExpression } from 'typeorm';
+import {
+  Brackets,
+  ObjectType,
+  OrderByCondition,
+  SelectQueryBuilder,
+  WhereExpression,
+} from 'typeorm';
 
-import { atob, btoa, encodeByType, decodeByType, pascalToUnderscore } from './utils';
+import {
+  atob,
+  btoa,
+  encodeByType,
+  decodeByType,
+  pascalToUnderscore,
+} from './utils';
 
 export type Order = 'ASC' | 'DESC';
 
@@ -113,7 +125,9 @@ export default class Paginator<Entity> {
     }
 
     if (Object.keys(cursors).length > 0) {
-      builder.andWhere(new Brackets(where => this.buildCursorQuery(where, cursors)));
+      builder.andWhere(
+        new Brackets((where) => this.buildCursorQuery(where, cursors)),
+      );
     }
 
     builder.take(this.limit + 1);
@@ -126,7 +140,7 @@ export default class Paginator<Entity> {
     const operator = this.getOperator();
     const params: CursorParam = {};
     let query = '';
-    this.paginationKeys.forEach(key => {
+    this.paginationKeys.forEach((key) => {
       params[key] = cursors[key];
       where.orWhere(`${query}${this.alias}.${key} ${operator} :${key}`, params);
       query = `${query}${this.alias}.${key} = :${key} AND `;
@@ -156,7 +170,7 @@ export default class Paginator<Entity> {
 
   private builderOrderByCondition(order: Order): OrderByCondition {
     const orderByCondition: OrderByCondition = {};
-    this.paginationKeys.forEach(key => {
+    this.paginationKeys.forEach((key) => {
       orderByCondition[`${this.alias}.${key}`] = order;
     });
 
@@ -173,7 +187,7 @@ export default class Paginator<Entity> {
 
   private encode(entity: Entity): string {
     const payload = this.paginationKeys
-      .map(key => {
+      .map((key) => {
         const type = this.getEntityPropertyType(key);
         const value = encodeByType(type, entity[key]);
         return `${key}:${value}`;
@@ -186,7 +200,7 @@ export default class Paginator<Entity> {
   private decode(cursor: string): CursorParam {
     const cursors: CursorParam = {};
     const columns = atob(cursor).split(',');
-    columns.forEach(column => {
+    columns.forEach((column) => {
       const [key, raw] = column.split(':');
       const type = this.getEntityPropertyType(key);
       const value = decodeByType(type, raw);
@@ -197,7 +211,11 @@ export default class Paginator<Entity> {
   }
 
   private getEntityPropertyType(key: string): string {
-    return Reflect.getMetadata('design:type', this.entity.prototype, key).name.toLowerCase();
+    return Reflect.getMetadata(
+      'design:type',
+      this.entity.prototype,
+      key,
+    ).name.toLowerCase();
   }
 
   private flipOrder(order: Order): Order {

@@ -30,13 +30,17 @@ export function encodeByType(type: string, value: any): string | null {
 
       break;
     }
-    default: break;
+    default:
+      break;
   }
 
   throw new Error(`unknown type in cursor: [${type}]${value}`);
 }
 
-export function decodeByType(type: string, value: string): string | number | Date {
+export function decodeByType(
+  type: string,
+  value: string,
+): string | number | Date {
   switch (type) {
     case 'object':
     case 'date': {
@@ -84,7 +88,10 @@ export function stringToNumber(value: string): number {
 }
 
 export function camelOrPascalToUnderscore(str: string): string {
-  return str.split(/(?=[A-Z])/).join('_').toLowerCase();
+  return str
+    .split(/(?=[A-Z])/)
+    .join('_')
+    .toLowerCase();
 }
 
 export function pascalToUnderscore(str: string): string {

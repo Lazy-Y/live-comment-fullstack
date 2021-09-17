@@ -20,7 +20,12 @@ export function buildPaginator<Entity>(
   builder: SelectQueryBuilder<Entity>,
   options: PaginationOptions<Entity>,
 ): Paginator<Entity> {
-  const { entity, query = {}, alias = entity.name.toLowerCase(), paginationKeys = ['id' as any] } = options;
+  const {
+    entity,
+    query = {},
+    alias = entity.name.toLowerCase(),
+    paginationKeys = ['id' as any],
+  } = options;
 
   const paginator = new Paginator(entity, paginationKeys, builder);
 

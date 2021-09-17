@@ -50,8 +50,14 @@ function Paginated<T>(classRef: Type<T>): Type<IPaginatedType<T>> {
   abstract class PaginatedType implements IPaginatedType<T> {
     public paginator: Paginator<T>;
 
-    constructor(public queryBuilder: SelectQueryBuilder<T>, public paginationOptions: PaginationOptions<T>) {
-      this.paginator = buildPaginator(this.queryBuilder, this.paginationOptions);
+    constructor(
+      public queryBuilder: SelectQueryBuilder<T>,
+      public paginationOptions: PaginationOptions<T>,
+    ) {
+      this.paginator = buildPaginator(
+        this.queryBuilder,
+        this.paginationOptions,
+      );
     }
 
     @Field(() => [EdgeType], { nullable: true })

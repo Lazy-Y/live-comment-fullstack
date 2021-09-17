@@ -1,4 +1,12 @@
-import { Args, Resolver, Query, Mutation, ID, Parent, ResolveField } from '@nestjs/graphql';
+import {
+  Args,
+  Resolver,
+  Query,
+  Mutation,
+  ID,
+  Parent,
+  ResolveField,
+} from '@nestjs/graphql';
 import { PageArgs } from 'src/server/graphql/pagination';
 import { User } from 'src/server/users/user.model';
 import { UsersService } from 'src/server/users/users.service';
@@ -8,7 +16,10 @@ import { PostsService } from './posts.service';
 
 @Resolver(() => Post)
 export class PostsResolver {
-  constructor(private postsService: PostsService, private usersService: UsersService) {}
+  constructor(
+    private postsService: PostsService,
+    private usersService: UsersService,
+  ) {}
 
   @Query(() => Post)
   post(@Args('id', { type: () => ID }) id: number) {
@@ -21,7 +32,9 @@ export class PostsResolver {
   }
 
   @Query(() => PaginatedPost)
-  async queryPosts(@Args('pageArg', { type: () => PageArgs }) args: PageArgs): Promise<PaginatedPost> {
+  async queryPosts(
+    @Args('pageArg', { type: () => PageArgs }) args: PageArgs,
+  ): Promise<PaginatedPost> {
     return this.postsService.queryAll(args);
   }
 

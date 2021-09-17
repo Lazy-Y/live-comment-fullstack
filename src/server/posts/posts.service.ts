@@ -25,14 +25,17 @@ export class PostsService {
   }
 
   async queryAll(pageArgs: PageArgs): Promise<PaginatedPost> {
-    return new PaginatedPost(this.postsRepository.createQueryBuilder(Post.name.toLowerCase()), {
-      entity: Post,
-      paginationKeys: ['id'],
-      query: {
-        order: 'ASC',
-        ...pageArgs,
+    return new PaginatedPost(
+      this.postsRepository.createQueryBuilder(Post.name.toLowerCase()),
+      {
+        entity: Post,
+        paginationKeys: ['id'],
+        query: {
+          order: 'ASC',
+          ...pageArgs,
+        },
       },
-    });
+    );
   }
 
   findOne(id: number): Promise<Post> {

@@ -4,9 +4,9 @@ import { PostsModule } from './posts/posts.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
-// import { RenderModule } from 'nest-next';
-// import Next from 'next';
-// import { AppController } from './app.controller';
+import { RenderModule } from 'nest-next';
+import Next from 'next';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -17,10 +17,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       sortSchema: true,
     }),
     TypeOrmModule.forRoot(),
-    // RenderModule.forRootAsync(
-    //   Next({ dev: process.env.NODE_ENV !== 'production' }),
-    // ),
+    RenderModule.forRootAsync(
+      Next({
+        dev: process.env.NODE_ENV !== 'production',
+        dir: './src',
+      }),
+    ),
   ],
-  // controllers: [AppController],
+  controllers: [AppController],
 })
 export class AppModule {}
